@@ -6,19 +6,9 @@ let longitudes = [];
 let happinessScores = [];
 let map, heatmap;
 
-const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-
-
 function App() {
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=visualization`;
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      initMap();
-    };
-    document.head.appendChild(script);
+    initMap();
   }, []);
 
   function getEmojiUrl(score) {
@@ -39,65 +29,73 @@ function App() {
     fetch("http://localhost:5000/api/emotion")
       .then(response => response.json())
       .then(data => {
-        data.forEach(row => {
-          latitudes.push(parseFloat(row.latitude));
-          longitudes.push(parseFloat(row.longitude));
-          happinessScores.push(parseFloat(row.score));
-        });
+        if (data.length > 0) {
+          data.forEach(row => {
+            latitudes.push(parseFloat(row.latitude));
+            longitudes.push(parseFloat(row.longitude));
+            happinessScores.push(parseFloat(row.score));
+          });
 
-        map = new window.google.maps.Map(document.getElementById("map"), {
-          zoom: 5.3,
-          center: { lat: 22.9734, lng: 78.6569 },
-          mapTypeId: "satellite",
-        });
+          if (latitudes.length > 0) {
+            map = new window.google.maps.Map(document.getElementById("map"), {
+              zoom: 5.3,
+              center: { lat: 22.9734, lng: 78.6569 },
+              mapTypeId: "satellite",
+            });
 
-        const gradient = [
-          "rgba(0, 255, 255, 0)",
-          "rgba(0, 255, 255, 1)",
-          "rgba(0, 191, 255, 1)",
-          "rgba(0, 127, 255, 1)",
-          "rgba(0, 63, 255, 1)",
-          "rgba(0, 0, 255, 1)",
-          "rgba(0, 0, 223, 1)",
-          "rgba(0, 0, 191, 1)",
-          "rgba(0, 0, 159, 1)",
-          "rgba(0, 0, 127, 1)",
-          "rgba(63, 0, 91, 1)",
-          "rgba(127, 0, 63, 1)",
-          "rgba(191, 0, 31, 1)",
-          "rgba(255, 0, 0, 1)",
-        ];
+            const gradient = [
+              "rgba(0, 255, 255, 0)",
+              "rgba(0, 255, 255, 1)",
+              "rgba(0, 191, 255, 1)",
+              "rgba(0, 127, 255, 1)",
+              "rgba(0, 63, 255, 1)",
+              "rgba(0, 0, 255, 1)",
+              "rgba(0, 0, 223, 1)",
+              "rgba(0, 0, 191, 1)",
+              "rgba(0, 0, 159, 1)",
+              "rgba(0, 0, 127, 1)",
+              "rgba(63, 0, 91, 1)",
+              "rgba(127, 0, 63, 1)",
+              "rgba(191, 0, 31, 1)",
+              "rgba(255, 0, 0, 1)",
+            ];
 
-        heatmap = new window.google.maps.visualization.HeatmapLayer({
-          data: getPoints(),
-          map: map,
-          gradient: gradient, 
-          radius: 30,
-        });
-        
+            heatmap = new window.google.maps.visualization.HeatmapLayer({
+              data: getPoints(),
+              map: map,
+              gradient: gradient,
+              radius: 40,
+            });
 
-    latitudes.forEach((lat, index) => {
-      const marker = new window.google.maps.Marker({
-        position: { lat: lat, lng: longitudes[index] },
-        map: map,
-        title: `Happiness Score: ${happinessScores[index]}`,
-        icon: {
-          url: getEmojiUrl(happinessScores[index]),
-          scaledSize: new window.google.maps.Size(30, 30),
-        },
-      });
-    });
+            latitudes.forEach((lat, index) => {
+              if (!isNaN(lat) && !isNaN(longitudes[index]) && !isNaN(happinessScores[index])) {
+                const marker = new window.google.maps.Marker({
+                  position: { lat: lat, lng: longitudes[index] },
+                  map: map,
+                  title: `Happiness Score: ${happinessScores[index]}`,
+                  icon: {
+                    url: getEmojiUrl(happinessScores[index]),
+                    scaledSize: new window.google.maps.Size(25, 25),
+                  },
+                });
+              }
+            });
 
-        document
-          .getElementById("toggle-heatmap")
-          .addEventListener("click", toggleHeatmap);
-        document
-          .getElementById("change-opacity")
-          .addEventListener("click", changeOpacity);
-        document
-          .getElementById("change-radius")
-          .addEventListener("click", changeRadius);
-      });
+            document
+              .getElementById("toggle-heatmap")
+              .addEventListener("click", toggleHeatmap);
+            document
+              .getElementById("change-opacity")
+              .addEventListener("click", changeOpacity);
+            document
+              .getElementById("change-radius")
+              .addEventListener("click", changeRadius);
+          }
+        } else {
+          console.error("No data received for emotions.");
+        }
+      })
+      .catch(error => console.error("Error fetching emotion data:", error));
   }
 
   function toggleHeatmap() {
@@ -105,7 +103,7 @@ function App() {
   }
 
   function changeRadius() {
-    heatmap.set("radius", heatmap.get("radius") ? null : 40);
+    heatmap.set("radius", heatmap.get("radius") ? null : 50);
   }
 
   function changeOpacity() {
@@ -125,7 +123,7 @@ function App() {
     <div className="landing-page">
       <div className="content">
         <h1 className="title">Happy Maps</h1>
-        <p className="subtitle">Tagline</p>
+        <p className="subtitle">Happiness Has a Location!</p>
       </div>
 
       <div className='Map'>
@@ -135,7 +133,7 @@ function App() {
           <button id="change-opacity">Change opacity</button>
         </div>
 
-        <div id="map" style={{ height: '500px', width: '100%' }}></div>
+        <div id="map" style={{ height: '650px', width: '150%' }}></div>
       </div>
     </div>
   );
