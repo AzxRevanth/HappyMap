@@ -26,6 +26,7 @@
 | Backend   | Node.js, Express.js    |
 | Database  | MongoDB                |
 | Tools     | CORS, Axios/Fetch API  |
+| NLP       | NLTK, Vadar            |
 
 ---
 
