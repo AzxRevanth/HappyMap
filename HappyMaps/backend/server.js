@@ -10,7 +10,7 @@ app.use(cors({
 }));
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://piyushrathi105:19QXv6uNNlARGBiy@cluster0.grxmynq.mongodb.net/HappyMaps?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect('add your connection string here');
 
 
 // Connection event listeners (ADD THESE RIGHT AFTER mongoose.connect)
@@ -30,7 +30,7 @@ const emotionSchema = new mongoose.Schema({
   score: String,
 });
 
-const Emotion = mongoose.model('Emotion', emotionSchema, 'emotion');
+const Emotion = mongoose.model('Emotion', emotionSchema, 'emotion'); //change the name of database collection according to your database
 
 // Routes
 app.get('/', (req, res) => {
