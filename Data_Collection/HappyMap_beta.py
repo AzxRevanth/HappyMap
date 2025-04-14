@@ -16,7 +16,7 @@ from geopy.geocoders import Nominatim
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pymongo
 
-client=pymongo.MongoClient("mongodb+srv://piyushrathi105:19QXv6uNNlARGBiy@cluster0.grxmynq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+client=pymongo.MongoClient("your connection string here")
 db=client["HappyMaps"]
 collection=db["emotion"]
 
