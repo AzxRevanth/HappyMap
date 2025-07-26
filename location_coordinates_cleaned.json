@@ -1,0 +1,107 @@
+[
+  {
+    "happiness_score": 0.2505,
+    "latitude": 22.351115,
+    "longitude": 78.667743
+  },
+  {
+    "happiness_score": 0.9357,
+    "latitude": 54.702354,
+    "longitude": -3.276575
+  },
+  {
+    "happiness_score": -0.1027,
+    "latitude": -24.776109,
+    "longitude": 134.755
+  },
+  {
+    "happiness_score": 0.2263,
+    "latitude": 46.603354,
+    "longitude": 1.888334
+  },
+  {
+    "happiness_score": 0.2263,
+    "latitude": 51.163818,
+    "longitude": 10.447831
+  },
+  {
+    "happiness_score": -0.0937,
+    "latitude": 32.647531,
+    "longitude": 54.564352
+  },
+  {
+    "happiness_score": -0.0931,
+    "latitude": 30.33084,
+    "longitude": 71.247499
+  },
+  {
+    "happiness_score": 0.1998,
+    "latitude": 24.476929,
+    "longitude": 90.293441
+  },
+  {
+    "happiness_score": 0.0,
+    "latitude": -41.500083,
+    "longitude": 172.834408
+  },
+  {
+    "happiness_score": 0.2263,
+    "latitude": 35.689252,
+    "longitude": 51.3896
+  },
+  {
+    "happiness_score": 0.4588,
+    "latitude": 39.294076,
+    "longitude": 35.231663
+  },
+  {
+    "happiness_score": -0.3612,
+    "latitude": 34.014486,
+    "longitude": 75.328516
+  },
+  {
+    "happiness_score": -0.4868,
+    "latitude": 33.693812,
+    "longitude": 73.065151
+  },
+  {
+    "happiness_score": 0.765,
+    "latitude": 40.712728,
+    "longitude": -74.006015
+  },
+  {
+    "happiness_score": -0.0191,
+    "latitude": 39.78373,
+    "longitude": -100.445882
+  },
+  {
+    "happiness_score": 0.1027,
+    "latitude": 40.190632,
+    "longitude": 116.412144
+  },
+  {
+    "happiness_score": -0.4137,
+    "latitude": 64.686314,
+    "longitude": 97.745306
+  },
+  {
+    "happiness_score": 0.1571,
+    "latitude": 35.000074,
+    "longitude": 104.999927
+  },
+  {
+    "happiness_score": -0.128,
+    "latitude": 1.357107,
+    "longitude": 103.819499
+  },
+  {
+    "happiness_score": -0.93,
+    "latitude": 49.487197,
+    "longitude": 31.271832
+  },
+  {
+    "happiness_score": -0.93,
+    "latitude": 30.812425,
+    "longitude": 34.859476
+  }
+]
